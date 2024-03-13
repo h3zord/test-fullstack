@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import { ZodError, z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
+import { getLoginService } from '../service/login'
 
 export async function getLoginController(
   req: Request,

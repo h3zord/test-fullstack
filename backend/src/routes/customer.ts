@@ -1,7 +1,8 @@
-import { Request, Response, Router } from 'express'
+import { NextFunction, Request, Response, Router } from 'express'
+import { getCustomerController } from '../controller/customer'
 
 export const customerRouter: Router = Router()
 
 customerRouter.get('/', (req: Request, res: Response) =>
-  res.status(200).json({ message: 'OK!' }),
+  getCustomerController(req, res),
 )
