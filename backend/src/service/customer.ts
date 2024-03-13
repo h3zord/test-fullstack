@@ -27,3 +27,33 @@ export async function createCustomerService({
     throw new Error('Failed to create a new customer')
   }
 }
+
+interface IUpdateCustomerData extends TCreateAndUpdateCustomerSchema {
+  id: string
+}
+
+export async function updateCustomerService({
+  id,
+  fullName,
+  email,
+  cpf,
+  phone,
+  status,
+}: IUpdateCustomerData) {
+  try {
+    await prisma.update({
+      where: {
+        id,
+      },
+      data: {
+        fullName,
+        email,
+        cpf,
+        phone,
+        status,
+      },
+    })
+  } catch (_error) {
+    throw new Error('Failed to update a customer')
+  }
+}

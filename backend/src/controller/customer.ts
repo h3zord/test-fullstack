@@ -1,5 +1,9 @@
 import { Request, Response } from 'express'
-import { readCustomerService, createCustomerService } from '../service/customer'
+import {
+  readCustomerService,
+  createCustomerService,
+  updateCustomerService,
+} from '../service/customer'
 import {
   TCreateAndUpdateCustomerSchema,
   validateSchema,
@@ -15,7 +19,7 @@ export async function createCustomerController(req: Request, res: Response) {
   const { fullName, email, cpf, phone, status } =
     req.body as TCreateAndUpdateCustomerSchema
 
-  const postCustomerData = validateSchema({
+  const createCustomerData = validateSchema({
     fullName,
     email,
     cpf,
@@ -24,11 +28,11 @@ export async function createCustomerController(req: Request, res: Response) {
   })
 
   await createCustomerService({
-    fullName: postCustomerData.fullName,
-    email: postCustomerData.email,
-    cpf: postCustomerData.cpf,
-    phone: postCustomerData.phone,
-    status: postCustomerData.status,
+    fullName: createCustomerData.fullName,
+    email: createCustomerData.email,
+    cpf: createCustomerData.cpf,
+    phone: createCustomerData.phone,
+    status: createCustomerData.status,
   })
 
   return res.status(201).end()
