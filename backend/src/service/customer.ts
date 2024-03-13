@@ -1,10 +1,10 @@
-export async function getCustomerService() {
+export async function readCustomerService() {
   const customerList = prisma.customer.findMany()
 
   return { customerList }
 }
 
-interface IPostCustomerData {
+interface ICreateCustomerData {
   fullName: string
   email: string
   cpf: string
@@ -12,13 +12,13 @@ interface IPostCustomerData {
   status: string
 }
 
-export async function postCustomerService({
+export async function createCustomerService({
   fullName,
   email,
   cpf,
   phone,
   status,
-}: IPostCustomerData) {
+}: ICreateCustomerData) {
   try {
     await prisma.create({
       data: {

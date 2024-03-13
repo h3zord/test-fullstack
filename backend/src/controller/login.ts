@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from 'express'
 import { ZodError, z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
-import { getLoginService } from '../service/login'
+import { readLoginService } from '../service/login'
 
-export async function getLoginController(
+export async function readLoginController(
   req: Request,
   res: Response,
   next: NextFunction,
 ) {
-  const loginSchema = z
+  const readLoginSchema = z
     .object({
       email: z
         .string({
@@ -28,21 +28,21 @@ export async function getLoginController(
     })
     .required()
 
-  type LoginSchema = z.infer<typeof loginSchema>
+  type TReadLoginSchema = z.infer<typeof readLoginSchema>
 
-  const { email, password } = req.body as LoginSchema
+  const { email, password } = req.body as TReadLoginSchema
 
-  let userData = {} as LoginSchema
+  let userData = {} as TReadLoginSchema
 
   try {
-    userData = loginSchema.parse({ email, password })
+    userData = readLoginSchema.parse({ email, password })
   } catch (error) {
     const validationError = fromZodError(error as ZodError)
 
     return next(validationError)
   }
 
-  await getLoginService({
+  await readLoginService({
     email: userData.email,
     password: userData.password,
   })

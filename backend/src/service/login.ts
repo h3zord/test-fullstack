@@ -1,11 +1,11 @@
 import bcrypt from 'bcryptjs'
 
-interface IGetUserData {
+interface IReadLoginData {
   email: string
   password: string
 }
 
-export async function getLoginService({ email, password }: IGetUserData) {
+export async function readLoginService({ email, password }: IReadLoginData) {
   const userData = await prisma.user.findUnique({
     where: {
       email,
