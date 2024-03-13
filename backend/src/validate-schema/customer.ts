@@ -59,6 +59,7 @@ export function validateSchema({
     })
   } catch (error) {
     const validationError = fromZodError(error as ZodError)
+
     throw new Error(validationError.message)
   }
 

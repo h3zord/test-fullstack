@@ -1,15 +1,9 @@
+import { TCreateAndUpdateCustomerSchema } from '../validate-schema/customer'
+
 export async function readCustomerService() {
-  const customerList = prisma.customer.findMany()
+  const customerList = await prisma.customer.findMany()
 
   return { customerList }
-}
-
-interface ICreateCustomerData {
-  fullName: string
-  email: string
-  cpf: string
-  phone: string
-  status: string
 }
 
 export async function createCustomerService({
@@ -18,7 +12,7 @@ export async function createCustomerService({
   cpf,
   phone,
   status,
-}: ICreateCustomerData) {
+}: TCreateAndUpdateCustomerSchema) {
   try {
     await prisma.create({
       data: {

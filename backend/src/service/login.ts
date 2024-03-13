@@ -1,11 +1,7 @@
 import bcrypt from 'bcryptjs'
+import { TReadLoginSchema } from '../validate-schema/login'
 
-interface IReadLoginData {
-  email: string
-  password: string
-}
-
-export async function readLoginService({ email, password }: IReadLoginData) {
+export async function readLoginService({ email, password }: TReadLoginSchema) {
   const userData = await prisma.user.findUnique({
     where: {
       email,
