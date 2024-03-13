@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express'
+import { Request, Response } from 'express'
 import { readCustomerService, createCustomerService } from '../service/customer'
 import {
   TCreateAndUpdateCustomerSchema,
@@ -34,8 +34,28 @@ export async function createCustomerController(req: Request, res: Response) {
   return res.status(201).end()
 }
 
-export async function updateCustomerController(
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) { }
+export async function updateCustomerController(req: Request, res: Response) {
+  const { fullName, email, cpf, phone, status } =
+    req.body as TCreateAndUpdateCustomerSchema
+
+  const { id } = req.params
+
+  const updateCustomerData = validateSchema({
+    fullName,
+    email,
+    cpf,
+    phone,
+    status,
+  })
+
+  await updateCustomerService({
+    id,
+    fullName: updateCustomerData.fullName,
+    email: updateCustomerData.email,
+    cpf: updateCustomerData.cpf,
+    phone: updateCustomerData.phone,
+    status: updateCustomerData.status,
+  })
+
+  return res.status(200).end()
+}
