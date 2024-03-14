@@ -1,3 +1,4 @@
+import { prisma } from '../lib/prisma'
 import { TCreateAndUpdateCustomerSchema } from '../validate-schema/customer'
 
 export async function readCustomerService() {
@@ -14,9 +15,9 @@ export async function createCustomerService({
   status,
 }: TCreateAndUpdateCustomerSchema) {
   try {
-    await prisma.create({
+    await prisma.customer.create({
       data: {
-        fullName,
+        full_name: fullName,
         email,
         cpf,
         phone,
@@ -41,12 +42,12 @@ export async function updateCustomerService({
   status,
 }: IUpdateCustomerData) {
   try {
-    await prisma.update({
+    await prisma.customer.update({
       where: {
         id,
       },
       data: {
-        fullName,
+        full_name: fullName,
         email,
         cpf,
         phone,
