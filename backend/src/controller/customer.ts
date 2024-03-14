@@ -35,7 +35,7 @@ export async function createCustomerController(req: Request, res: Response) {
     status: createCustomerData.status,
   })
 
-  return res.status(201).json({ sucess: 'Customer created successfully!' })
+  return res.status(201).json({ sucess: 'Cliente criado com sucesso!' })
 }
 
 export async function updateCustomerController(req: Request, res: Response) {
@@ -61,5 +61,5 @@ export async function updateCustomerController(req: Request, res: Response) {
     status: updateCustomerData.status,
   })
 
-  return res.status(200).json({ sucess: 'Customer updated successfully!' })
+  return res.status(200).json({ sucess: 'Cliente atualizado com sucesso!' })
 }

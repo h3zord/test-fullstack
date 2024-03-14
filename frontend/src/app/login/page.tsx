@@ -4,10 +4,24 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { api } from '@/fetch/api'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function Login() {
   const [loginError, setLoginError] = useState('')
+
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set(name, value)
+
+      return params.toString()
+    },
+    [searchParams],
+  )
 
   const loginDataSchema = z
     .object({
@@ -51,9 +65,15 @@ export default function Login() {
           password: loginData.password,
         }),
       })
+
+      router.push('/home' + '?' + createQueryString('user', 'admin'))
     } catch (error) {
       if (error instanceof Error) setLoginError(error.message)
     }
+  }
+
+  function handleLoginAsGuest() {
+    router.push('/home' + '?' + createQueryString('user', 'guest'))
   }
 
   return (
@@ -66,12 +86,15 @@ export default function Login() {
         type="text"
         {...register('email')}
       />
+
       {errors.email && <p>{errors.email.message}</p>}
+
       <input
         placeholder="Digite sua senha!"
         type="password"
         {...register('password')}
       />
+
       {errors.password && <p>{errors.password.message}</p>}
 
       {loginError && <p>{loginError}</p>}
@@ -80,7 +103,7 @@ export default function Login() {
         <button type="submit" disabled={isSubmitting}>
           Login
         </button>
-        <button type="submit">Entrar como visitante</button>
+        <button onClick={handleLoginAsGuest}>Entrar como visitante</button>
       </div>
 
       <button>Github</button>

@@ -17,5 +17,5 @@ export async function loginController(req: Request, res: Response) {
     password: loginData.password,
   })
 
-  return res.status(200).json({ sucess: 'Login successfully!' })
+  return res.status(200).json({ sucess: 'Login realizado com sucesso!' })
 }
