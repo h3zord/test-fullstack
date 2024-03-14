@@ -49,6 +49,7 @@ export const defaultTheme = {
 
     gray: {
       300: '#dfdfdf',
+      500: '#333333',
       900: '#151515',
     },
 
