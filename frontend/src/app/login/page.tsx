@@ -3,6 +3,7 @@
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { api } from '@/fetch/api'
 
 export default function Login() {
   const loginDataSchema = z
@@ -35,8 +36,11 @@ export default function Login() {
     resolver: zodResolver(loginDataSchema),
   })
 
-  function handleSubmitLogin(loginData: TLoginDataSchema) {
-    console.log(loginData)
+  async function handleSubmitLogin(loginData: TLoginDataSchema) {
+    const data = await api('/customer')
+    const customers = await data.json()
+
+    console.log(customers)
   }
 
   return (
