@@ -1,18 +1,18 @@
 import bcrypt from 'bcryptjs'
-import { TReadLoginSchema } from '../validate-schema/login'
+import { TLoginSchema } from '../validate-schema/login'
 import { prisma } from '../lib/prisma'
 
-export async function readLoginService({ email, password }: TReadLoginSchema) {
+export async function loginService({ email, password }: TLoginSchema) {
   const userData = await prisma.user.findUnique({
     where: {
       email,
     },
   })
 
-  if (!userData) throw new Error('User not found')
+  if (!userData) throw new Error('Email ou senha estão incorretos!')
 
   const hash = userData.password
 
   if (!bcrypt.compareSync(password, hash))
-    throw new Error('Password do not match')
+    throw new Error('Email ou senha estão incorretos!')
 }

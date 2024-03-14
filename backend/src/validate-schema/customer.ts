@@ -5,33 +5,39 @@ const createAndUpdateCustomerSchema = z
   .object({
     fullName: z
       .string({
-        required_error: 'Name is required',
-        invalid_type_error: 'Name must be a string',
+        required_error: 'O campo full name é obrigatório!',
+        invalid_type_error: 'O campo full name deve ser uma string!',
       })
-      .min(5, { message: 'Name must be 5 or more characters long' }),
+      .min(5, {
+        message: 'O campo full name deve conter no mínimo 5 caracteres!',
+      }),
     email: z
       .string({
-        required_error: 'Email is required',
-        invalid_type_error: 'Email must be a string',
+        required_error: 'O campo email é obrigatório!',
+        invalid_type_error: 'O campo email deve ser uma string!',
       })
-      .email({ message: 'Invalid email address' })
+      .email({ message: 'O email é inválido!' })
       .toLowerCase(),
     cpf: z
       .string({
-        required_error: 'CPF is required',
-        invalid_type_error: 'CPF must be a string',
+        required_error: 'O campo CPF é obrigatório!',
+        invalid_type_error: 'O campo CPF deve ser uma string!',
       })
-      .length(11, { message: 'CPF must be exactly 11 characters long' }),
+      .length(11, {
+        message: 'O campo CPF deve conter exatamente 11 caracteres!',
+      }),
     phone: z
       .string({
-        required_error: 'Phone number is required',
-        invalid_type_error: 'Phone number must be a string',
+        required_error: 'O campo phone é obrigatório!',
+        invalid_type_error: 'O campo phone deve ser uma string!',
       })
-      .length(11, { message: 'CPF must be exactly 11 characters long' }),
+      .length(11, {
+        message: 'O campo phone deve conter exatamente 11 caracteres!',
+      }),
     status: z.enum(['Ativo', 'Inativo', 'Aguardando ativação', 'Desativado'], {
-      required_error: 'Status is required',
+      required_error: 'O campo status é obrigatório!',
       invalid_type_error:
-        'Status must be exactly "Ativo" or "Inativo" or "Aguardando autorização" or "Desativado"',
+        'O campo status deve exatamente "Ativo" ou "Inativo" ou "Aguardando autorização ou "Desativado"!',
     }),
   })
   .required()

@@ -4,8 +4,11 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { api } from '@/fetch/api'
+import { useState } from 'react'
 
 export default function Login() {
+  const [loginError, setLoginError] = useState('')
+
   const loginDataSchema = z
     .object({
       email: z
@@ -37,10 +40,20 @@ export default function Login() {
   })
 
   async function handleSubmitLogin(loginData: TLoginDataSchema) {
-    const data = await api('/customer')
-    const customers = await data.json()
-
-    console.log(customers)
+    try {
+      await api('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: loginData.email,
+          password: loginData.password,
+        }),
+      })
+    } catch (error) {
+      if (error instanceof Error) setLoginError(error.message)
+    }
   }
 
   return (
@@ -60,6 +73,8 @@ export default function Login() {
         {...register('password')}
       />
       {errors.password && <p>{errors.password.message}</p>}
+
+      {loginError && <p>{loginError}</p>}
 
       <div>
         <button type="submit" disabled={isSubmitting}>

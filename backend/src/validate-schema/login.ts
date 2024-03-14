@@ -1,33 +1,33 @@
 import { z } from 'zod'
 import { ZodError, fromZodError } from 'zod-validation-error'
 
-const readLoginSchema = z
+const loginSchema = z
   .object({
     email: z
       .string({
-        required_error: 'Email is required',
-        invalid_type_error: 'Email must be a string',
+        required_error: 'O campo email é obrigatório!',
+        invalid_type_error: 'O campo email deve ser uma string!',
       })
-      .email({ message: 'Invalid email address' })
+      .email({ message: 'O email é inválido!' })
       .toLowerCase(),
     password: z
       .string({
-        required_error: 'Password is required',
-        invalid_type_error: 'Password must be a string',
+        required_error: 'O campo password é obrigatório!',
+        invalid_type_error: 'O campo password deve ser uma string!',
       })
       .min(5, {
-        message: 'Password must be 5 or more characters long',
+        message: 'O campo password deve conter no mínimo 5 caracteres!',
       }),
   })
   .required()
 
-export type TReadLoginSchema = z.infer<typeof readLoginSchema>
+export type TLoginSchema = z.infer<typeof loginSchema>
 
-export function validateSchema({ email, password }: TReadLoginSchema) {
-  let loginDataParsed = {} as TReadLoginSchema
+export function validateSchema({ email, password }: TLoginSchema) {
+  let loginDataParsed = {} as TLoginSchema
 
   try {
-    loginDataParsed = readLoginSchema.parse({ email, password })
+    loginDataParsed = loginSchema.parse({ email, password })
   } catch (error) {
     const validationError = fromZodError(error as ZodError)
 

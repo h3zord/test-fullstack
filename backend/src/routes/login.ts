@@ -1,8 +1,8 @@
 import { Request, Response, Router } from 'express'
-import { readLoginController } from '../controller/login'
+import { loginController } from '../controller/login'
 
 export const LoginRouter: Router = Router()
 
-LoginRouter.get('/', (req: Request, res: Response) =>
-  readLoginController(req, res),
+LoginRouter.post('/', (req: Request, res: Response) =>
+  loginController(req, res),
 )

@@ -1,19 +1,21 @@
 import { Request, Response } from 'express'
-import { readLoginService } from '../service/login'
-import { TReadLoginSchema, validateSchema } from '../validate-schema/login'
+import { loginService } from '../service/login'
+import { TLoginSchema, validateSchema } from '../validate-schema/login'
 
-export async function readLoginController(req: Request, res: Response) {
-  const { email, password } = req.body as TReadLoginSchema
+export async function loginController(req: Request, res: Response) {
+  const { email, password } = req.body as TLoginSchema
 
-  const readLoginData = validateSchema({
+  console.log(req.body)
+
+  const loginData = validateSchema({
     email,
     password,
   })
 
-  await readLoginService({
-    email: readLoginData.email,
-    password: readLoginData.password,
+  await loginService({
+    email: loginData.email,
+    password: loginData.password,
   })
 
-  return res.status(200).end()
+  return res.status(200).json({ sucess: 'Login successfully!' })
 }
