@@ -125,11 +125,11 @@ export default function Login() {
           <DefaultButton type="submit" disabled={isSubmitting}>
             Login <MdOutlineLogin />
           </DefaultButton>
-          <DefaultButton>
+          <DefaultButton type="button">
             Entrar com Github <FiGithub />
           </DefaultButton>
 
-          <DefaultButton onClick={handleLoginAsGuest}>
+          <DefaultButton type="button" onClick={handleLoginAsGuest}>
             Entrar como visitante <CgProfile />
           </DefaultButton>
         </ButtonContainer>

@@ -1,7 +1,13 @@
+import { CallToActionContainer, IntroductionText, Main } from './styles'
+import { FiUser } from 'react-icons/fi'
+
 export default function Home() {
   return (
-    <main style={{ width: '80vw', margin: 'auto', border: '1px solid black' }}>
-      <section
+    <Main>
+      <IntroductionText>
+        <FiUser color="black" /> Painel de Clientes
+      </IntroductionText>
+      <CallToActionContainer
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -10,10 +16,10 @@ export default function Home() {
       >
         <div>
           <p>Listagem de usuários</p>
-          <p>Escolha um cliente para visualizar os detalhes</p>
+          <span>Escolha um cliente para visualizar os detalhes</span>
         </div>
         <button>Novo cliente</button>
-      </section>
+      </CallToActionContainer>
 
       <section>
         <div
@@ -38,6 +44,6 @@ export default function Home() {
           test test test test
         </div>
       </section>
-    </main>
+    </Main>
   )
 }

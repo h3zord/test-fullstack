@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 export const IntroductionText = styled.h1`
   margin-top: 50px;
-  font-size: ${(props) => props.theme.fontSizes['3xl']};
+  font-size: ${(props) => props.theme.fontSizes['4xl']};
   color: ${(props) => props.theme.colors.gray[500]};
   text-align: center;
 `
