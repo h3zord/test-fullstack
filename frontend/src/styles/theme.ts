@@ -23,6 +23,7 @@ export const defaultTheme = {
     lg: '1.125rem',
     xl: '1.25rem',
     '2xl': '1.5rem',
+    '3xl': '2.5rem',
   },
 
   fontWeights: {
@@ -49,6 +50,7 @@ export const defaultTheme = {
 
     gray: {
       300: '#dfdfdf',
+      400: '#A9A9A9',
       500: '#333333',
       900: '#151515',
     },
@@ -71,4 +73,4 @@ export const defaultTheme = {
     lg: '20px',
     full: '99999px',
   },
-}
+} as const

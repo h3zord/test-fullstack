@@ -6,6 +6,17 @@ import { useForm } from 'react-hook-form'
 import { api } from '@/fetch/api'
 import { useCallback, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { FiGithub } from 'react-icons/fi'
+import { MdOutlineLogin } from 'react-icons/md'
+import { CgProfile } from 'react-icons/cg'
+import {
+  ButtonContainer,
+  DefaultButton,
+  DefaultInput,
+  ErrorContainer,
+  Form,
+  IntroductionText,
+} from './styles'
 
 export default function Login() {
   const [loginError, setLoginError] = useState('')
@@ -77,36 +88,52 @@ export default function Login() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit(handleSubmitLogin)}
-      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-    >
-      <input
-        placeholder="Digite seu email!"
-        type="text"
-        {...register('email')}
-      />
+    <>
+      <IntroductionText>Gerenciamento de clientes!</IntroductionText>
+      <Form onSubmit={handleSubmit(handleSubmitLogin)}>
+        <DefaultInput
+          placeholder="Digite seu email!"
+          type="text"
+          {...register('email')}
+        />
 
-      {errors.email && <p>{errors.email.message}</p>}
+        {errors.email ? (
+          <ErrorContainer>{errors.email.message}</ErrorContainer>
+        ) : (
+          <ErrorContainer></ErrorContainer>
+        )}
 
-      <input
-        placeholder="Digite sua senha!"
-        type="password"
-        {...register('password')}
-      />
+        <DefaultInput
+          placeholder="Digite sua senha!"
+          type="password"
+          {...register('password')}
+        />
 
-      {errors.password && <p>{errors.password.message}</p>}
+        {errors.password ? (
+          <ErrorContainer>{errors.password.message}</ErrorContainer>
+        ) : (
+          <ErrorContainer></ErrorContainer>
+        )}
 
-      {loginError && <p>{loginError}</p>}
+        {loginError ? (
+          <ErrorContainer>{loginError}</ErrorContainer>
+        ) : (
+          <ErrorContainer></ErrorContainer>
+        )}
 
-      <div>
-        <button type="submit" disabled={isSubmitting}>
-          Login
-        </button>
-        <button onClick={handleLoginAsGuest}>Entrar como visitante</button>
-      </div>
+        <ButtonContainer>
+          <DefaultButton type="submit" disabled={isSubmitting}>
+            Login <MdOutlineLogin />
+          </DefaultButton>
+          <DefaultButton>
+            Entrar com Github <FiGithub />
+          </DefaultButton>
 
-      <button>Github</button>
-    </form>
+          <DefaultButton onClick={handleLoginAsGuest}>
+            Entrar como visitante <CgProfile />
+          </DefaultButton>
+        </ButtonContainer>
+      </Form>
+    </>
   )
 }
