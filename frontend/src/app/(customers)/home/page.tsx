@@ -1,4 +1,13 @@
-import { CallToActionContainer, IntroductionText, Main } from './styles'
+import { DefaultButton } from '@/app/components/styles'
+import {
+  CallToActionContainer,
+  CustomersContainer,
+  CustomersContent,
+  IntroductionText,
+  Main,
+  StatusIndicator,
+  TestInput,
+} from './styles'
 import { FiUser } from 'react-icons/fi'
 
 export default function Home() {
@@ -21,29 +30,22 @@ export default function Home() {
         <button>Novo cliente</button>
       </CallToActionContainer>
 
-      <section>
-        <div
-          style={{
-            border: '1px solid red',
-            marginBottom: '25px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-around',
-            height: '100px',
-          }}
-        >
-          <p>teste</p>
-          <p>teste</p>
-          <p>teste</p>
-          <p>teste</p>
-        </div>
-        <div style={{ border: '1px solid red', marginBottom: '25px' }}>
-          test test test test
-        </div>
-        <div style={{ border: '1px solid red', marginBottom: '25px' }}>
-          test test test test
-        </div>
-      </section>
+      <CustomersContainer>
+        <CustomersContent>
+          <div>
+            <p>nome</p>
+            <span>email</span>
+          </div>
+          <div>
+            <p>cpf</p>
+            <span>phone</span>
+          </div>
+          <div>
+            <StatusIndicator $currentStatus="Ativo" /> status
+          </div>
+          <DefaultButton>Editar</DefaultButton>
+        </CustomersContent>
+      </CustomersContainer>
     </Main>
   )
 }

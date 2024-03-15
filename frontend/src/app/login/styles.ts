@@ -22,17 +22,6 @@ export const Form = styled.form`
   padding: ${(props) => props.theme.space[10]};
 `
 
-export const DefaultInput = styled.input`
-  border: 1.5px solid ${(props) => props.theme.colors.gray[400]};
-  padding: ${(props) => props.theme.space[3]};
-  border-radius: ${(props) => props.theme.radii.sm};
-
-  &::placeholder {
-    text-align: center;
-    color: ${(props) => props.theme.colors.gray[500]};
-  }
-`
-
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -40,7 +29,7 @@ export const ButtonContainer = styled.div`
   margin-top: ${(props) => props.theme.space[6]};
 `
 
-export const DefaultButton = styled.button`
+export const LoginButton = styled.button`
   all: unset;
   border: 1.5px solid ${(props) => props.theme.colors.yellow[400]};
   border-radius: ${(props) => props.theme.radii.sm};

@@ -46,7 +46,7 @@ export const defaultTheme = {
     black: '#000000',
 
     green: {
-      500: '"#006600"',
+      500: '#006600',
     },
 
     gray: {

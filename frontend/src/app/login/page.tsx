@@ -11,12 +11,12 @@ import { MdOutlineLogin } from 'react-icons/md'
 import { CgProfile } from 'react-icons/cg'
 import {
   ButtonContainer,
-  DefaultButton,
-  DefaultInput,
   ErrorContainer,
   Form,
   IntroductionText,
+  LoginButton,
 } from './styles'
+import { DefaultInput } from '../components/styles'
 
 export default function Login() {
   const [loginError, setLoginError] = useState('')
@@ -122,16 +122,16 @@ export default function Login() {
         )}
 
         <ButtonContainer>
-          <DefaultButton type="submit" disabled={isSubmitting}>
+          <LoginButton type="submit" disabled={isSubmitting}>
             Login <MdOutlineLogin />
-          </DefaultButton>
-          <DefaultButton type="button">
+          </LoginButton>
+          <LoginButton type="button">
             Entrar com Github <FiGithub />
-          </DefaultButton>
+          </LoginButton>
 
-          <DefaultButton type="button" onClick={handleLoginAsGuest}>
+          <LoginButton type="button" onClick={handleLoginAsGuest}>
             Entrar como visitante <CgProfile />
-          </DefaultButton>
+          </LoginButton>
         </ButtonContainer>
       </Form>
     </>

@@ -8,6 +8,10 @@ export const GlobalStyles = createGlobalStyle`
 
     input:focus {
       outline: 0;
+      box-shadow: 0 0 0 2px #151515;
+    }
+
+    input:hover {
       border-color: #333333;
     }
  }
