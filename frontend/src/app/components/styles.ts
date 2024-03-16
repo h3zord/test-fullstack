@@ -3,12 +3,6 @@
 
 import styled from 'styled-components'
 
-export const HeaderContainer = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: ${(props) => props.theme.colors.gray[500]};
-`
 export const DefaultInput = styled.input`
   border: 1.5px solid ${(props) => props.theme.colors.gray[400]};
   padding: ${(props) => props.theme.space[3]};
