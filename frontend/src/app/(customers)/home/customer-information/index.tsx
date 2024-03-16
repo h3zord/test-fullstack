@@ -21,8 +21,6 @@ export default function CustomerInfo() {
   async function getCustomers() {
     const { data } = await api('/customer')
 
-    console.log(data)
-
     setCustomersList(data)
   }
 
@@ -40,11 +38,8 @@ export default function CustomerInfo() {
           </div>
 
           <div>
-            <InputMask mask="999.999.999-99" value={customer.cpf}></InputMask>
-            <InputMask
-              mask="(99) 99999-9999"
-              value={customer.phone}
-            ></InputMask>
+            <InputMask mask="999.999.999-99" value={customer.cpf} />
+            <InputMask mask="(99) 99999-9999" value={customer.phone} />
           </div>
 
           <div>

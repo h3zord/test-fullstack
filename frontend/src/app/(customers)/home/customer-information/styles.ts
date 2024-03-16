@@ -6,6 +6,7 @@ export const CustomersContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: ${(props) => props.theme.space[5]};
+  border: 1px solid red;
 
   & > span {
     margin-top: ${(props) => props.theme.space[3]};

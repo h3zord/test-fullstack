@@ -7,13 +7,14 @@ import { api } from '@/fetch/api'
 import { useCallback, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { FiGithub } from 'react-icons/fi'
-import { MdOutlineLogin } from 'react-icons/md'
+import { MdOutlineLogin, MdFolderShared } from 'react-icons/md'
 import { CgProfile } from 'react-icons/cg'
 import {
   ButtonContainer,
   ErrorContainer,
   Form,
   IntroductionText,
+  IntroductionTitle,
   LoginButton,
 } from './styles'
 import { DefaultInput } from '../components/styles'
@@ -89,7 +90,12 @@ export default function Login() {
 
   return (
     <>
-      <IntroductionText>Gerenciamento de clientes!</IntroductionText>
+      <IntroductionTitle>
+        Gerenciamento de clientes!
+        <p>
+          <MdFolderShared size={70} />
+        </p>
+      </IntroductionTitle>
       <Form onSubmit={handleSubmit(handleSubmitLogin)}>
         <DefaultInput
           placeholder="Digite seu email!"

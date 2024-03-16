@@ -2,7 +2,7 @@
 
 import styled from 'styled-components'
 
-export const IntroductionText = styled.h1`
+export const IntroductionTitle = styled.h1`
   margin-top: 50px;
   font-size: ${(props) => props.theme.fontSizes['4xl']};
   color: ${(props) => props.theme.colors.gray[500]};
@@ -12,7 +12,7 @@ export const IntroductionText = styled.h1`
 export const Form = styled.form`
   width: 40vw;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;

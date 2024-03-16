@@ -1,7 +1,7 @@
 import { Providers } from '@/providers'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
-import Header from './components/header/header'
+import Header from './components/header'
 
 const roboto = Roboto({
   subsets: ['latin'],

@@ -7,10 +7,11 @@ export const DefaultInput = styled.input`
   border: 1.5px solid ${(props) => props.theme.colors.gray[400]};
   padding: ${(props) => props.theme.space[3]};
   border-radius: ${(props) => props.theme.radii.sm};
+  width: 20rem;
 
   &::placeholder {
-    text-align: center;
-    color: ${(props) => props.theme.colors.gray[500]};
+    color: ${(props) => props.theme.colors.gray[400]};
+  font-size: ${(props) => props.theme.fontSizes.md};
   }
 `
 
@@ -28,4 +29,15 @@ export const DefaultButton = styled.button`
     color: white;
     cursor: pointer;
   }
+`
+export const IntroductionTitle = styled.section`
+  width: 75vw;
+  margin: ${(props) => props.theme.space[8]} auto ${(props) => props.theme.space[2]};
+  border-bottom: 1.5px solid ${(props) => props.theme.colors.gray[300]};
+  display: flex;
+  align-items: center;
+  gap: ${(props) => props.theme.space[6]};
+  color: ${(props) => props.theme.colors.gray[500]};
+  font-size: ${(props) => props.theme.fontSizes['3xl']};
+  padding: ${(props) => props.theme.space[4]};
 `

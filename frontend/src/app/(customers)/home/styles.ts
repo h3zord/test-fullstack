@@ -6,25 +6,16 @@ import styled from 'styled-components'
 export const Main = styled.main`
   width: 75vw;
   margin: auto;
-  margin-top: 100px;
   padding: ${(props) => props.theme.space[2]};
-`
-
-export const IntroductionText = styled.section`
-  border-bottom: 1.5px solid ${(props) => props.theme.colors.gray[300]};
-  display: flex;
-  align-items: center;
-  gap: ${(props) => props.theme.space[6]};
-  color: ${(props) => props.theme.colors.gray[500]};
-  font-size: ${(props) => props.theme.fontSizes['3xl']};
-  padding: ${(props) => props.theme.space[4]};
+  border: 1px solid blue;
 `
 
 export const CallToActionContainer = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: ${(props) => props.theme.space[8]} 0;
+  margin: ${(props) => props.theme.space[5]} 0;
+  border: 1px solid red;
 
   & > div {
     display: flex;
