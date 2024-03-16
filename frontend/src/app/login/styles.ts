@@ -46,9 +46,3 @@ export const LoginButton = styled.button`
     cursor: pointer;
   }
 `
-
-export const ErrorContainer = styled.div`
-  font-size: ${(props) => props.theme.fontSizes.sm};
-  height: ${(props) => props.theme.space[4]};
-  color: ${(props) => props.theme.colors.red[400]};
-`

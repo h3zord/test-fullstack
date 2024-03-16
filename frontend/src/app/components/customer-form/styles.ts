@@ -36,3 +36,9 @@ export const CustomerFormContent = styled.section`
   flex-direction: column;
   gap: ${(props) => props.theme.space[5]};
 `
+
+export const FormButtonContainer = styled.div`
+  display: flex;
+  gap: ${(props) => props.theme.space[5]};
+  margin-top: ${(props) => props.theme.space[10]};
+`

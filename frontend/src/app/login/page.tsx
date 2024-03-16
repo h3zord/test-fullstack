@@ -9,15 +9,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { FiGithub } from 'react-icons/fi'
 import { MdOutlineLogin, MdFolderShared } from 'react-icons/md'
 import { CgProfile } from 'react-icons/cg'
-import {
-  ButtonContainer,
-  ErrorContainer,
-  Form,
-  IntroductionText,
-  IntroductionTitle,
-  LoginButton,
-} from './styles'
-import { DefaultInput } from '../components/styles'
+import { ButtonContainer, Form, IntroductionTitle, LoginButton } from './styles'
+import { DefaultErrorContainer, DefaultInput } from '../components/styles'
 
 export default function Login() {
   const [loginError, setLoginError] = useState('')
@@ -104,9 +97,9 @@ export default function Login() {
         />
 
         {errors.email ? (
-          <ErrorContainer>{errors.email.message}</ErrorContainer>
+          <DefaultErrorContainer>{errors.email.message}</DefaultErrorContainer>
         ) : (
-          <ErrorContainer></ErrorContainer>
+          <DefaultErrorContainer></DefaultErrorContainer>
         )}
 
         <DefaultInput
@@ -116,15 +109,17 @@ export default function Login() {
         />
 
         {errors.password ? (
-          <ErrorContainer>{errors.password.message}</ErrorContainer>
+          <DefaultErrorContainer>
+            {errors.password.message}
+          </DefaultErrorContainer>
         ) : (
-          <ErrorContainer></ErrorContainer>
+          <DefaultErrorContainer></DefaultErrorContainer>
         )}
 
         {loginError ? (
-          <ErrorContainer>{loginError}</ErrorContainer>
+          <DefaultErrorContainer>{loginError}</DefaultErrorContainer>
         ) : (
-          <ErrorContainer></ErrorContainer>
+          <DefaultErrorContainer></DefaultErrorContainer>
         )}
 
         <ButtonContainer>
