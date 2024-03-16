@@ -81,14 +81,26 @@ export const CustomersContent = styled.div`
     flex-direction: column;
     gap: ${(props) => props.theme.space[1]};
 
-    p {
+    :first-child {
       color: ${(props) => props.theme.colors.gray[500]};
       font-size: ${(props) => props.theme.fontSizes.lg};
     }
 
-    span {
+    :last-child {
       font-size: ${(props) => props.theme.fontSizes.md};
       color: ${(props) => props.theme.colors.gray[400]};
+    }
+  }
+
+  & > :nth-child(2) {
+    gap: ${(props) => props.theme.space.px};
+  
+    :first-child, :last-child {
+      border: none;
+
+      &:focus {
+        box-shadow: none;
+      }
     }
   }
 
@@ -118,8 +130,4 @@ export const StatusIndicator = styled.div<{ $currentStatus?: string }>`
       return props.theme.colors.gray[300]
     }
   }};
-`
-
-export const TestInput = styled.input`
-  background-color: red;
 `

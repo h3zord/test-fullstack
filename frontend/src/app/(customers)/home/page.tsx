@@ -1,3 +1,5 @@
+'use client'
+
 import { DefaultButton } from '@/app/components/styles'
 import {
   CallToActionContainer,
@@ -9,6 +11,7 @@ import {
   TestInput,
 } from './styles'
 import { FiUser } from 'react-icons/fi'
+import InputMask from 'react-input-mask'
 
 export default function Home() {
   return (
@@ -37,8 +40,8 @@ export default function Home() {
             <span>email</span>
           </div>
           <div>
-            <p>cpf</p>
-            <span>phone</span>
+            <InputMask mask="999.999.999-99" value="00683463950"></InputMask>
+            <InputMask mask="(99) 99999-9999" value="42999880661"></InputMask>
           </div>
           <div>
             <StatusIndicator $currentStatus="Ativo" /> status
