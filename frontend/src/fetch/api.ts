@@ -10,7 +10,7 @@ export async function api(path: string, init?: RequestInit) {
 
     if (data.error) throw new Error(data.error)
 
-    return data
+    return { data }
   } catch (error) {
     let errorMessage = 'Unknown Error'
 

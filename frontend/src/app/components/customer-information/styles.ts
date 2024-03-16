@@ -9,6 +9,7 @@ export const CustomersContainer = styled.section`
 
   & > span {
     margin-top: ${(props) => props.theme.space[3]};
+    margin-bottom: ${(props) => props.theme.space[6]};
     font-size: ${(props) => props.theme.fontSizes.lg};
     color: ${(props) => props.theme.colors.gray[400]};
   }
@@ -26,15 +27,18 @@ export const CustomersContent = styled.div`
     display: flex;
     flex-direction: column;
     gap: ${(props) => props.theme.space[1]};
+    width: 20%;
 
     :first-child {
       color: ${(props) => props.theme.colors.gray[500]};
       font-size: ${(props) => props.theme.fontSizes.lg};
+      width: auto;
     }
 
     :last-child {
       font-size: ${(props) => props.theme.fontSizes.md};
       color: ${(props) => props.theme.colors.gray[400]};
+      width: auto;
     }
   }
 
@@ -56,6 +60,7 @@ export const CustomersContent = styled.div`
     align-items: center;
     justify-content: center;
     gap: ${(props) => props.theme.space[2]};
+    width: 15%;
   }
 `
 

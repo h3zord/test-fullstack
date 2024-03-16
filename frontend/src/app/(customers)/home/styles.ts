@@ -6,7 +6,6 @@ import styled from 'styled-components'
 export const Main = styled.main`
   width: 75vw;
   margin: auto;
-  border: 1px solid black;
   margin-top: 100px;
   padding: ${(props) => props.theme.space[2]};
 `
@@ -26,7 +25,6 @@ export const CallToActionContainer = styled.section`
   align-items: center;
   justify-content: space-between;
   margin: ${(props) => props.theme.space[8]} 0;
-  border: 1px solid yellow;
 
   & > div {
     display: flex;
