@@ -5,6 +5,7 @@ import { DefaultButton } from '@/app/components/styles'
 import { CustomersContainer, CustomersContent, StatusIndicator } from './styles'
 import { useEffect, useState } from 'react'
 import { api } from '@/fetch/api'
+import { useRouter } from 'next/navigation'
 
 interface ICustomers {
   id: string
@@ -18,6 +19,8 @@ interface ICustomers {
 export default function CustomerInfo() {
   const [customersList, setCustomersList] = useState<ICustomers[]>()
 
+  const router = useRouter()
+
   async function getCustomers() {
     const { data } = await api('/customer')
 
@@ -27,6 +30,10 @@ export default function CustomerInfo() {
   useEffect(() => {
     getCustomers()
   }, [])
+
+  function pushToUpdateCustomer(id: string) {
+    router.push(`/update-customer/${id}`)
+  }
 
   return (
     <CustomersContainer>
@@ -47,7 +54,9 @@ export default function CustomerInfo() {
             {customer.status}
           </div>
 
-          <DefaultButton>Editar</DefaultButton>
+          <DefaultButton onClick={() => pushToUpdateCustomer(customer.id)}>
+            Editar
+          </DefaultButton>
         </CustomersContent>
       ))}
 

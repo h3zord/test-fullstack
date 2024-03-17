@@ -3,8 +3,9 @@
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { api } from '@/fetch/api'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { z } from 'zod'
+import { useParams } from 'next/navigation'
 import {
   DefaultButton,
   DefaultErrorContainer,
@@ -20,10 +21,10 @@ import {
 } from './styles'
 
 interface ICustomerFormProps {
-  finality: 'create' | 'update'
+  formFinality: 'create' | 'update'
 }
 
-export default function CustomerForm({ finality }: ICustomerFormProps) {
+export default function CustomerForm({ formFinality }: ICustomerFormProps) {
   const [createOrUpdateError, setCreateOrUpdateError] = useState('')
 
   const customerFormSchema = z
@@ -90,6 +91,27 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
 
   type TCustomerFormSchema = z.infer<typeof customerFormSchema>
 
+  const [inputDefaultValues, setInputDefaultValues] =
+    useState<TCustomerFormSchema>()
+
+  const { id } = useParams()
+
+  useEffect(() => {
+    async function getCustomerById() {
+      const { data } = await api(`/customer/${id}`)
+
+      setInputDefaultValues({
+        fullName: data.full_name,
+        email: data.email,
+        cpf: data.cpf,
+        phone: data.phone,
+        status: data.status,
+      })
+    }
+
+    if (id) getCustomerById()
+  }, [id])
+
   const {
     register,
     handleSubmit,
@@ -98,7 +120,7 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
     formState: { errors, isSubmitting },
   } = useForm<TCustomerFormSchema>({
     resolver: zodResolver(customerFormSchema),
-    defaultValues: {
+    defaultValues: inputDefaultValues || {
       cpf: '',
       phone: '',
     },
@@ -150,13 +172,13 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
   return (
     <CustomerFormContainer
       onSubmit={
-        finality === 'create'
+        formFinality === 'create'
           ? handleSubmit(handleCreateCustomer)
           : handleSubmit(handleUpdateCustomer)
       }
     >
       <CallToActionContainer>
-        {finality === 'create' ? (
+        {formFinality === 'create' ? (
           <div>
             <p>Novo usuário</p>
             <span>Informe os campos a seguir para criar novo usuário:</span>
@@ -230,7 +252,7 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
           disabled={isSubmitting}
           $reverseHover={true}
         >
-          {finality === 'create' ? 'Criar' : 'Atualizar'}
+          {formFinality === 'create' ? 'Criar' : 'Atualizar'}
         </DefaultButton>
         <DefaultButton>Voltar</DefaultButton>
       </FormButtonContainer>
