@@ -71,14 +71,14 @@ export default function Login() {
         }),
       })
 
-      router.push('/home' + '?' + createQueryString('user', 'admin'))
+      return router.push('/home' + '?' + createQueryString('user', 'admin'))
     } catch (error) {
       if (error instanceof Error) setLoginError(error.message)
     }
   }
 
   function handleLoginAsGuest() {
-    router.push('/home' + '?' + createQueryString('user', 'guest'))
+    return router.push('/home' + '?' + createQueryString('user', 'guest'))
   }
 
   type TPossibleErrors = {

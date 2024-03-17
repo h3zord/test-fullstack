@@ -7,7 +7,6 @@ export const CallToActionContainer = styled.section`
   display: flex;
   align-items: center;
   margin: ${(props) => props.theme.space[5]} 0;
-  border: 1px solid red;
 
   & > div {
     display: flex;
@@ -29,7 +28,6 @@ export const CustomerFormContainer = styled.form`
   width: 75vw;
   margin: auto;
   padding: ${(props) => props.theme.space[2]};
-  border: 1px solid blue;
 `
 
 export const CustomerFormContent = styled.section`

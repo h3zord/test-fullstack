@@ -7,7 +7,6 @@ export const Main = styled.main`
   width: 75vw;
   margin: auto;
   padding: ${(props) => props.theme.space[2]};
-  border: 1px solid blue;
 `
 
 export const CallToActionContainer = styled.section`
@@ -15,7 +14,6 @@ export const CallToActionContainer = styled.section`
   align-items: center;
   justify-content: space-between;
   margin: ${(props) => props.theme.space[5]} 0;
-  border: 1px solid red;
 
   & > div {
     display: flex;

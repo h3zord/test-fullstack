@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import 'styled-components'
 import { defaultTheme } from '@/app/styles/theme'
 

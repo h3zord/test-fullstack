@@ -7,6 +7,18 @@ export async function readCustomerService() {
   return { customerList }
 }
 
+export async function readCustomerByIdService(id: string) {
+  const customerData = await prisma.customer.findUnique({
+    where: {
+      id,
+    },
+  })
+
+  if (!customerData) throw new Error('O cliente não existe!')
+
+  return { customerData }
+}
+
 export async function createCustomerService({
   fullName,
   email,
@@ -25,7 +37,7 @@ export async function createCustomerService({
       },
     })
   } catch (_error) {
-    throw new Error('Failed to create a new customer')
+    throw new Error('Email ou CPF já cadastrados!')
   }
 }
 
@@ -55,6 +67,6 @@ export async function updateCustomerService({
       },
     })
   } catch (_error) {
-    throw new Error('Failed to update a customer')
+    throw new Error('Falha ao atualizar um cliente!')
   }
 }

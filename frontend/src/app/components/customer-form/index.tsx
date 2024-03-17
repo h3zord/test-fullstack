@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { api } from '@/fetch/api'
 import { useEffect, useState } from 'react'
 import { z } from 'zod'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import {
   DefaultButton,
   DefaultErrorContainer,
@@ -26,6 +26,8 @@ interface ICustomerFormProps {
 
 export default function CustomerForm({ formFinality }: ICustomerFormProps) {
   const [createOrUpdateError, setCreateOrUpdateError] = useState('')
+
+  const router = useRouter()
 
   const customerFormSchema = z
     .object({
@@ -91,46 +93,46 @@ export default function CustomerForm({ formFinality }: ICustomerFormProps) {
 
   type TCustomerFormSchema = z.infer<typeof customerFormSchema>
 
-  const [inputDefaultValues, setInputDefaultValues] =
-    useState<TCustomerFormSchema>()
-
-  const { id } = useParams()
-
-  useEffect(() => {
-    async function getCustomerById() {
-      const { data } = await api(`/customer/${id}`)
-
-      setInputDefaultValues({
-        fullName: data.full_name,
-        email: data.email,
-        cpf: data.cpf,
-        phone: data.phone,
-        status: data.status,
-      })
-    }
-
-    if (id) getCustomerById()
-  }, [id])
-
   const {
     register,
     handleSubmit,
     control,
     reset,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<TCustomerFormSchema>({
     resolver: zodResolver(customerFormSchema),
-    defaultValues: inputDefaultValues || {
+    defaultValues: {
       cpf: '',
       phone: '',
     },
   })
 
-  type TPossibleErrors = {
+  const { id } = useParams()
+
+  useEffect(() => {
+    async function getCustomerById() {
+      try {
+        const { data } = await api(`/customer/${id}`)
+
+        setValue('fullName', data.full_name)
+        setValue('email', data.email)
+        setValue('cpf', data.cpf)
+        setValue('phone', data.phone)
+        setValue('status', data.status)
+      } catch (error) {
+        console.error('Error fetching customer:', error)
+      }
+    }
+
+    if (id) getCustomerById()
+  }, [id, setValue])
+
+  type ErrorFieldType = {
     errorMap: 'fullName' | 'email' | 'cpf' | 'phone' | 'status'
   }
 
-  function showErrorMessage({ errorMap }: TPossibleErrors) {
+  function showErrorMessage({ errorMap }: ErrorFieldType) {
     if (errors[errorMap]) {
       return (
         <DefaultErrorContainer>
@@ -160,13 +162,37 @@ export default function CustomerForm({ formFinality }: ICustomerFormProps) {
 
       reset()
       window.alert('Usuário criado!')
+      setCreateOrUpdateError('')
     } catch (error) {
       if (error instanceof Error) setCreateOrUpdateError(error.message)
     }
   }
 
-  function handleUpdateCustomer(data: TCustomerFormSchema) {
-    console.log(data)
+  async function handleUpdateCustomer(data: TCustomerFormSchema) {
+    try {
+      await api(`/customer/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName: data.fullName,
+          email: data.email,
+          cpf: data.cpf,
+          phone: data.phone,
+          status: data.status,
+        }),
+      })
+
+      window.alert('Usuário atualizado!')
+      return router.push('/home')
+    } catch (error) {
+      if (error instanceof Error) setCreateOrUpdateError(error.message)
+    }
+  }
+
+  function pushToHome() {
+    return router.push('/home')
   }
 
   return (
@@ -226,6 +252,7 @@ export default function CustomerForm({ formFinality }: ICustomerFormProps) {
                 mask="(99) 99999-9999"
                 placeholder="Telefone"
                 onChange={field.onChange}
+                value={field.value}
               />
             )
           }}
@@ -254,7 +281,9 @@ export default function CustomerForm({ formFinality }: ICustomerFormProps) {
         >
           {formFinality === 'create' ? 'Criar' : 'Atualizar'}
         </DefaultButton>
-        <DefaultButton>Voltar</DefaultButton>
+        <DefaultButton type="button" onClick={pushToHome}>
+          Voltar
+        </DefaultButton>
       </FormButtonContainer>
     </CustomerFormContainer>
   )

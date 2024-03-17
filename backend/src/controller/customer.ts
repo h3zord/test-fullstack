@@ -3,6 +3,7 @@ import {
   readCustomerService,
   createCustomerService,
   updateCustomerService,
+  readCustomerByIdService,
 } from '../service/customer'
 import {
   TCreateAndUpdateCustomerSchema,
@@ -13,6 +14,16 @@ export async function readCustomerController(_req: Request, res: Response) {
   const { customerList } = await readCustomerService()
 
   return res.status(200).json(customerList)
+}
+
+export async function readCustomerByIdController(req: Request, res: Response) {
+  const { id } = req.params
+
+  if (!id) throw new Error('É necessário fornececer um ID!')
+
+  const { customerData } = await readCustomerByIdService(id)
+
+  return res.status(200).json(customerData)
 }
 
 export async function createCustomerController(req: Request, res: Response) {
@@ -43,6 +54,8 @@ export async function updateCustomerController(req: Request, res: Response) {
     req.body as TCreateAndUpdateCustomerSchema
 
   const { id } = req.params
+
+  if (!id) throw new Error('É necessário fornececer um ID!')
 
   const updateCustomerData = validateSchema({
     fullName,

@@ -7,13 +7,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <IntroductionTitle>
-          <FiUser color="black" /> Painel de Clientes
-        </IntroductionTitle>
-        {children}
-      </body>
-    </html>
+    <>
+      <IntroductionTitle>
+        <FiUser color="black" /> Painel de Clientes
+      </IntroductionTitle>
+      {children}
+    </>
   )
 }
