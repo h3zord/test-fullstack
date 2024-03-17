@@ -35,9 +35,18 @@ const createAndUpdateCustomerSchema = z
         message: 'O campo phone deve conter exatamente 11 caracteres!',
       }),
     status: z.enum(['Ativo', 'Inativo', 'Aguardando ativação', 'Desativado'], {
-      required_error: 'O campo status é obrigatório!',
-      invalid_type_error:
-        'O campo status deve exatamente "Ativo" ou "Inativo" ou "Aguardando autorização ou "Desativado"!',
+      errorMap: (issue) => {
+        if (issue.code === 'invalid_type') {
+          return { message: 'O campo status é obrigatório' }
+        }
+        if (issue.code === 'invalid_enum_value') {
+          return {
+            message:
+              'O campo status deve ser exatamente "Ativo", "Inativo", "Aguardando autorização" ou "Desativado"',
+          }
+        }
+        return { message: issue.message ?? '' }
+      },
     }),
   })
   .required()

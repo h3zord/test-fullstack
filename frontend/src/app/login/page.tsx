@@ -81,6 +81,22 @@ export default function Login() {
     router.push('/home' + '?' + createQueryString('user', 'guest'))
   }
 
+  type TPossibleErrors = {
+    errorMap: 'email' | 'password'
+  }
+
+  function showErrorMessage({ errorMap }: TPossibleErrors) {
+    if (errors[errorMap]) {
+      return (
+        <DefaultErrorContainer>
+          {errors[errorMap]?.message}
+        </DefaultErrorContainer>
+      )
+    } else {
+      return <DefaultErrorContainer />
+    }
+  }
+
   return (
     <>
       <IntroductionTitle>
@@ -96,11 +112,7 @@ export default function Login() {
           {...register('email')}
         />
 
-        {errors.email ? (
-          <DefaultErrorContainer>{errors.email.message}</DefaultErrorContainer>
-        ) : (
-          <DefaultErrorContainer />
-        )}
+        {showErrorMessage({ errorMap: 'email' })}
 
         <DefaultInput
           placeholder="Digite sua senha!"
@@ -108,19 +120,9 @@ export default function Login() {
           {...register('password')}
         />
 
-        {errors.password ? (
-          <DefaultErrorContainer>
-            {errors.password.message}
-          </DefaultErrorContainer>
-        ) : (
-          <DefaultErrorContainer />
-        )}
+        {showErrorMessage({ errorMap: 'password' })}
 
-        {loginError ? (
-          <DefaultErrorContainer>{loginError}</DefaultErrorContainer>
-        ) : (
-          <DefaultErrorContainer />
-        )}
+        <DefaultErrorContainer>{loginError}</DefaultErrorContainer>
 
         <ButtonContainer>
           <LoginButton type="submit" disabled={isSubmitting}>

@@ -1,6 +1,14 @@
 'use client'
 
-import { DefaultButton, DefaultInput, DefaultSelect } from '../styles'
+import {
+  DefaultButton,
+  DefaultErrorContainer,
+  DefaultInput,
+  DefaultSelect,
+} from '../styles'
+import { Controller, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 import {
   CallToActionContainer,
   CustomerFormContainer,
@@ -8,9 +16,6 @@ import {
   FormButtonContainer,
   StyledInputMask,
 } from './styles'
-import { z } from 'zod'
-import { Controller, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 
 interface ICustomerFormProps {
   finality: 'create' | 'update'
@@ -65,9 +70,15 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
       status: z.enum(
         ['Ativo', 'Inativo', 'Aguardando ativação', 'Desativado'],
         {
-          required_error: 'Selecione um status!',
-          invalid_type_error:
-            'O campo status deve exatamente "Ativo" ou "Inativo" ou "Aguardando autorização ou "Desativado"!',
+          errorMap: (issue) => {
+            if (
+              issue.code === 'invalid_enum_value' ||
+              issue.code === 'invalid_type'
+            ) {
+              return { message: 'Selecione um status!' }
+            }
+            return { message: issue.message ?? '' }
+          },
         },
       ),
     })
@@ -84,6 +95,22 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
     resolver: zodResolver(customerFormSchema),
   })
 
+  type TPossibleErrors = {
+    errorMap: 'fullName' | 'email' | 'cpf' | 'phone' | 'status'
+  }
+
+  function showErrorMessage({ errorMap }: TPossibleErrors) {
+    if (errors[errorMap]) {
+      return (
+        <DefaultErrorContainer>
+          {errors[errorMap]?.message}
+        </DefaultErrorContainer>
+      )
+    } else {
+      return <DefaultErrorContainer />
+    }
+  }
+
   function handleCreateCustomer(data: TCustomerFormSchema) {
     console.log(data)
   }
@@ -91,6 +118,8 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
   function handleUpdateCustomer(data: TCustomerFormSchema) {
     console.log(data)
   }
+
+  console.log(errors)
 
   return (
     <CustomerFormContainer
@@ -113,7 +142,12 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
 
       <CustomerFormContent>
         <DefaultInput placeholder="Nome" {...register('fullName')} />
+
+        {showErrorMessage({ errorMap: 'fullName' })}
+
         <DefaultInput placeholder="E-mail" {...register('email')} />
+
+        {showErrorMessage({ errorMap: 'email' })}
 
         <Controller
           control={control}
@@ -124,10 +158,13 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
                 mask="999.999.999-99"
                 placeholder="CPF"
                 onChange={field.onChange}
+                value={field.value}
               />
             )
           }}
         />
+
+        {showErrorMessage({ errorMap: 'cpf' })}
 
         <Controller
           control={control}
@@ -143,6 +180,8 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
           }}
         />
 
+        {showErrorMessage({ errorMap: 'phone' })}
+
         <DefaultSelect {...register('status')}>
           <option>Status</option>
           <option value="Ativo">Ativo</option>
@@ -150,6 +189,8 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
           <option value="Aguardando ativação">Aguardando ativação</option>
           <option value="Desativado">Desativado</option>
         </DefaultSelect>
+
+        {showErrorMessage({ errorMap: 'status' })}
       </CustomerFormContent>
 
       <FormButtonContainer>

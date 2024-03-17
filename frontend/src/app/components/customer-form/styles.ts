@@ -35,7 +35,7 @@ export const CustomerFormContainer = styled.form`
 export const CustomerFormContent = styled.section`
   display: flex;
   flex-direction: column;
-  gap: ${(props) => props.theme.space[5]};
+  gap: ${(props) => props.theme.space[2]};
 `
 
 export const FormButtonContainer = styled.div`

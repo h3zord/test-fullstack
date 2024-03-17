@@ -16,7 +16,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: ${(props) => props.theme.space['3']};
+  gap: ${(props) => props.theme.space[2]};
   border: 2px solid ${(props) => props.theme.colors.gray[400]};
   border-radius: ${(props) => props.theme.radii.sm};
   padding: ${(props) => props.theme.space[10]};
