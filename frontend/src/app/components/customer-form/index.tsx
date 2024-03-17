@@ -1,14 +1,16 @@
 'use client'
 
+import { Controller, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { api } from '@/fetch/api'
+import { useState } from 'react'
+import { z } from 'zod'
 import {
   DefaultButton,
   DefaultErrorContainer,
   DefaultInput,
   DefaultSelect,
 } from '../styles'
-import { Controller, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 import {
   CallToActionContainer,
   CustomerFormContainer,
@@ -22,6 +24,8 @@ interface ICustomerFormProps {
 }
 
 export default function CustomerForm({ finality }: ICustomerFormProps) {
+  const [createOrUpdateError, setCreateOrUpdateError] = useState('')
+
   const customerFormSchema = z
     .object({
       fullName: z
@@ -90,9 +94,14 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    reset,
+    formState: { errors, isSubmitting },
   } = useForm<TCustomerFormSchema>({
     resolver: zodResolver(customerFormSchema),
+    defaultValues: {
+      cpf: '',
+      phone: '',
+    },
   })
 
   type TPossibleErrors = {
@@ -111,15 +120,32 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
     }
   }
 
-  function handleCreateCustomer(data: TCustomerFormSchema) {
-    console.log(data)
+  async function handleCreateCustomer(data: TCustomerFormSchema) {
+    try {
+      await api('/customer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName: data.fullName,
+          email: data.email,
+          cpf: data.cpf,
+          phone: data.phone,
+          status: data.status,
+        }),
+      })
+
+      reset()
+      window.alert('Usuário criado!')
+    } catch (error) {
+      if (error instanceof Error) setCreateOrUpdateError(error.message)
+    }
   }
 
   function handleUpdateCustomer(data: TCustomerFormSchema) {
     console.log(data)
   }
-
-  console.log(errors)
 
   return (
     <CustomerFormContainer
@@ -130,14 +156,17 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
       }
     >
       <CallToActionContainer>
-        <div>
-          <p>{finality === 'create' ? 'Novo usuário' : 'Atualizar usuário'}</p>
-          <span>
-            {finality === 'create'
-              ? 'Informe os campos a seguir para criar novo usuário:'
-              : 'Informe os campos a seguir para atualizar usuário:'}
-          </span>
-        </div>
+        {finality === 'create' ? (
+          <div>
+            <p>Novo usuário</p>
+            <span>Informe os campos a seguir para criar novo usuário:</span>
+          </div>
+        ) : (
+          <div>
+            <p>Atualizar usuário</p>
+            <span>Informe os campos a seguir para atualizar usuário:</span>
+          </div>
+        )}
       </CallToActionContainer>
 
       <CustomerFormContent>
@@ -191,10 +220,16 @@ export default function CustomerForm({ finality }: ICustomerFormProps) {
         </DefaultSelect>
 
         {showErrorMessage({ errorMap: 'status' })}
+
+        <DefaultErrorContainer>{createOrUpdateError}</DefaultErrorContainer>
       </CustomerFormContent>
 
       <FormButtonContainer>
-        <DefaultButton type="submit" $reverseHover={true}>
+        <DefaultButton
+          type="submit"
+          disabled={isSubmitting}
+          $reverseHover={true}
+        >
           {finality === 'create' ? 'Criar' : 'Atualizar'}
         </DefaultButton>
         <DefaultButton>Voltar</DefaultButton>

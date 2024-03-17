@@ -41,7 +41,7 @@ export const CustomerFormContent = styled.section`
 export const FormButtonContainer = styled.div`
   display: flex;
   gap: ${(props) => props.theme.space[5]};
-  margin-top: ${(props) => props.theme.space[10]};
+  margin-top: ${(props) => props.theme.space[5]};
 `
 
 export const StyledInputMask = styled(InputMask)`
