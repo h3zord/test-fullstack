@@ -43,7 +43,7 @@ export default function Login() {
           required_error: 'Digite sua senha!',
         })
         .min(5, {
-          message: 'A senha deve possuir no mínimo 5 dígitos!',
+          message: 'A senha deve possuir no mínimo 5 caracteres!',
         }),
     })
     .required()
@@ -99,7 +99,7 @@ export default function Login() {
         {errors.email ? (
           <DefaultErrorContainer>{errors.email.message}</DefaultErrorContainer>
         ) : (
-          <DefaultErrorContainer></DefaultErrorContainer>
+          <DefaultErrorContainer />
         )}
 
         <DefaultInput
@@ -113,13 +113,13 @@ export default function Login() {
             {errors.password.message}
           </DefaultErrorContainer>
         ) : (
-          <DefaultErrorContainer></DefaultErrorContainer>
+          <DefaultErrorContainer />
         )}
 
         {loginError ? (
           <DefaultErrorContainer>{loginError}</DefaultErrorContainer>
         ) : (
-          <DefaultErrorContainer></DefaultErrorContainer>
+          <DefaultErrorContainer />
         )}
 
         <ButtonContainer>
