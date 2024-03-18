@@ -52,7 +52,7 @@ export const DefaultErrorContainer = styled.div`
 
 export const IntroductionTitle = styled.section`
   width: 75vw;
-  margin: ${(props) => props.theme.space[1]} auto ${(props) => props.theme.space[2]};
+  margin: ${(props) => props.theme.space[3]} auto ${(props) => props.theme.space[2]};
   border-bottom: 1.5px solid ${(props) => props.theme.colors.gray[300]};
   display: flex;
   align-items: center;
