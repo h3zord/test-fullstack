@@ -40,9 +40,14 @@ export const LoginButton = styled.button`
   justify-content: center;
   gap: ${(props) => props.theme.space[1]};
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: ${(props) => props.theme.colors.yellow[700]};
     color: white;
     cursor: pointer;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 `
