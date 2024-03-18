@@ -52,7 +52,7 @@ export const DefaultErrorContainer = styled.div`
 
 export const IntroductionTitle = styled.section`
   width: 75vw;
-  margin: ${(props) => props.theme.space[3]} auto ${(props) => props.theme.space[2]};
+  margin: ${(props) => props.theme.space[10]} auto ${(props) => props.theme.space[2]};
   border-bottom: 1.5px solid ${(props) => props.theme.colors.gray[300]};
   display: flex;
   align-items: center;
@@ -63,17 +63,17 @@ export const IntroductionTitle = styled.section`
 `
 
 export const WelcomeCard = styled.section`
-  border: 2px solid ${(props) => props.theme.colors.gray[500]};
+  position: absolute;
+  top: 0;
+  right: ${(props) => props.theme.space[2]};
+  border: 2px solid ${(props) => props.theme.colors.gray[300]};
   border-top: none;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  gap: ${(props) => props.theme.space[2]};
-  width: 15rem;
-  margin-left: auto;
-  margin-right: ${(props) => props.theme.space[3]};
-  color: ${(props) => props.theme.colors.gray[900]};
+  gap: ${(props) => props.theme.space[1]};
+  color: white;
   font-size: ${(props) => props.theme.fontSizes.md};
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
