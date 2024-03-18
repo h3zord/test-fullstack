@@ -11,6 +11,7 @@ import { MdOutlineLogin, MdFolderShared } from 'react-icons/md'
 import { CgProfile } from 'react-icons/cg'
 import { ButtonContainer, Form, IntroductionTitle, LoginButton } from './styles'
 import { DefaultErrorContainer, DefaultInput } from '../components/styles'
+import { signIn } from 'next-auth/react'
 
 export default function Login() {
   const [loginError, setLoginError] = useState('')
@@ -128,7 +129,10 @@ export default function Login() {
           <LoginButton type="submit" disabled={isSubmitting}>
             Login <MdOutlineLogin />
           </LoginButton>
-          <LoginButton type="button">
+          <LoginButton
+            type="button"
+            onClick={() => signIn('github', { callbackUrl: '/home' })}
+          >
             Entrar com Github <FiGithub />
           </LoginButton>
 
