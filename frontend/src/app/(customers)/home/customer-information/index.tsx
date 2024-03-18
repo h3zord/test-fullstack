@@ -17,7 +17,7 @@ interface ICustomers {
 }
 
 export default function CustomerInfo() {
-  const [customersList, setCustomersList] = useState<ICustomers[]>()
+  const [customersList, setCustomersList] = useState<ICustomers[]>([])
 
   const router = useRouter()
 
@@ -37,7 +37,7 @@ export default function CustomerInfo() {
 
   return (
     <CustomersContainer>
-      {customersList?.map((customer) => (
+      {customersList.map((customer) => (
         <CustomersContent key={customer.id}>
           <div>
             <p>{customer.full_name}</p>
@@ -60,7 +60,7 @@ export default function CustomerInfo() {
         </CustomersContent>
       ))}
 
-      <span>{`Exibindo ${customersList?.length} clientes`}</span>
+      <span>{`Exibindo ${customersList.length} clientes`}</span>
     </CustomersContainer>
   )
 }
