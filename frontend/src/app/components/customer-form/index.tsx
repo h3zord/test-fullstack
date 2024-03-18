@@ -165,7 +165,7 @@ export default function CustomerForm({ formFinality }: ICustomerFormProps) {
 
       reset()
 
-      toast.success('Cliente criado com sucesso! 👨🏼‍💼')
+      toast.success('Cliente criado com sucesso!')
     } catch (error) {
       if (error instanceof Error) setCreateOrUpdateError(error.message)
     }
@@ -187,7 +187,7 @@ export default function CustomerForm({ formFinality }: ICustomerFormProps) {
         }),
       })
 
-      toast.success('Cliente atualizado com sucesso! 👩🏼‍💼')
+      toast.success('Cliente atualizado com sucesso!')
 
       return router.push('/home')
     } catch (error) {
