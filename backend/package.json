@@ -4,9 +4,8 @@
   "description": "",
   "main": "./build/server.js",
   "scripts": {
-    "postinstall": "prisma generate",
     "dev": "nodemon src/server.ts --watch",
-    "prod": "tsc && node .",
+    "prod": "prisma generate && tsc && node .",
     "lint": "eslint src --ext .ts,.tsx"
   },
   "keywords": [],
