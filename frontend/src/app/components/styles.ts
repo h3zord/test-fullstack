@@ -36,10 +36,15 @@ export const DefaultButton = styled.button<{ $reverseHover?: boolean }>`
   padding: ${(props) => props.theme.space[3]} ${(props) => props.theme.space[5]};
   text-align: center;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: ${(props) => props.$reverseHover ? 'white' : props.theme.colors.yellow[700]};
     color: ${(props) => props.$reverseHover ? props.theme.colors.yellow[400] : 'white'};
     cursor: pointer;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 `
 

@@ -19,6 +19,7 @@ import {
   FormButtonContainer,
   StyledInputMask,
 } from './styles'
+import { toast } from 'react-toastify'
 
 interface ICustomerFormProps {
   formFinality: 'create' | 'update'
@@ -160,9 +161,11 @@ export default function CustomerForm({ formFinality }: ICustomerFormProps) {
         }),
       })
 
-      reset()
-      window.alert('Usuário criado!')
       setCreateOrUpdateError('')
+
+      reset()
+
+      toast.success('Cliente criado com sucesso! 👨🏼‍💼')
     } catch (error) {
       if (error instanceof Error) setCreateOrUpdateError(error.message)
     }
@@ -184,7 +187,8 @@ export default function CustomerForm({ formFinality }: ICustomerFormProps) {
         }),
       })
 
-      window.alert('Usuário atualizado!')
+      toast.success('Cliente atualizado com sucesso! 👩🏼‍💼')
+
       return router.push('/home')
     } catch (error) {
       if (error instanceof Error) setCreateOrUpdateError(error.message)

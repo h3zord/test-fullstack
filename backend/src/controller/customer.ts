@@ -46,7 +46,7 @@ export async function createCustomerController(req: Request, res: Response) {
     status: createCustomerData.status,
   })
 
-  return res.status(201).json({ sucess: 'Cliente criado com sucesso!' })
+  return res.status(201).json({ success: 'Cliente criado com sucesso!' })
 }
 
 export async function updateCustomerController(req: Request, res: Response) {
@@ -74,5 +74,5 @@ export async function updateCustomerController(req: Request, res: Response) {
     status: updateCustomerData.status,
   })
 
-  return res.status(200).json({ sucess: 'Cliente atualizado com sucesso!' })
+  return res.status(200).json({ success: 'Cliente atualizado com sucesso!' })
 }
