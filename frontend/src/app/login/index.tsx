@@ -4,8 +4,8 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { api } from '@/fetch/api'
-import { useCallback, useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { FiGithub } from 'react-icons/fi'
 import { MdOutlineLogin, MdFolderShared } from 'react-icons/md'
 import { CgProfile } from 'react-icons/cg'
@@ -17,17 +17,6 @@ export default function Login() {
   const [loginError, setLoginError] = useState('')
 
   const router = useRouter()
-  const searchParams = useSearchParams()
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
-
-      return params.toString()
-    },
-    [searchParams],
-  )
 
   const loginDataSchema = z
     .object({
@@ -72,21 +61,21 @@ export default function Login() {
         }),
       })
 
-      return router.push('/home' + '?' + createQueryString('user', 'admin'))
+      return router.push('/home')
     } catch (error) {
       if (error instanceof Error) setLoginError(error.message)
     }
   }
 
   function handleLoginAsGuest() {
-    return router.push('/home' + '?' + createQueryString('user', 'guest'))
+    return router.push('/home')
   }
 
-  type TPossibleErrors = {
+  type ErrorFieldType = {
     errorMap: 'email' | 'password'
   }
 
-  function showErrorMessage({ errorMap }: TPossibleErrors) {
+  function showErrorMessage({ errorMap }: ErrorFieldType) {
     if (errors[errorMap]) {
       return (
         <DefaultErrorContainer>
