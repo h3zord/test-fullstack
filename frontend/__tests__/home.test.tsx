@@ -12,7 +12,7 @@ jest.mock('next/navigation', () => ({
   },
 }))
 
-jest.mock('../fetch/api.ts', () => ({
+jest.mock('../src/fetch/api.ts', () => ({
   api: jest.fn(),
 }))
 

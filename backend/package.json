@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "./build/server.js",
+  "main": "./build/src/server.js",
   "scripts": {
     "dev": "nodemon src/server.ts --watch",
     "prod": "prisma generate && tsc && node .",

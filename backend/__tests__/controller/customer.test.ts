@@ -1,17 +1,17 @@
 import { Request, Response } from 'express'
-import { TCreateAndUpdateCustomerSchema } from '../../validate-schema/customer'
+import { TCreateAndUpdateCustomerSchema } from '../../src/validate-schema/customer'
 import {
   createCustomerService,
   readCustomerService,
   updateCustomerService,
-} from '../../service/customer'
+} from '../../src/service/customer'
 import {
   createCustomerController,
   readCustomerController,
   updateCustomerController,
-} from '../../controller/customer'
+} from '../../src/controller/customer'
 
-jest.mock('../../service/customer', () => ({
+jest.mock('../../src/service/customer', () => ({
   readCustomerService: jest.fn(),
   createCustomerService: jest.fn(),
   updateCustomerService: jest.fn(),
