@@ -1,6 +1,6 @@
-import { prisma } from '../../lib/prisma'
-import { readCustomerService } from '../../service/customer'
-import { TCreateAndUpdateCustomerSchema } from '../../validate-schema/customer'
+import { prisma } from '../../src/lib/prisma'
+import { readCustomerService } from '../../src/service/customer'
+import { TCreateAndUpdateCustomerSchema } from '../../src/validate-schema/customer'
 
 jest.mock('@prisma/client', () => ({
   PrismaClient: jest.fn().mockImplementation(() => ({
