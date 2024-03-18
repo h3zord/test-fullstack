@@ -7,4 +7,5 @@ export const HeaderContainer = styled.header`
   align-items: center;
   justify-content: center;
   background-color: ${(props) => props.theme.colors.gray[500]};
+  height: 9rem;
 `
