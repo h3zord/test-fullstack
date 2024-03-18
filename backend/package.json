@@ -2,9 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "/build/src/server.js",
+  "main": "./build/server.js",
   "scripts": {
     "dev": "nodemon src/server.ts --watch",
+    "prod": "tsc && node .",
     "lint": "eslint src --ext .ts,.tsx"
   },
   "keywords": [],
