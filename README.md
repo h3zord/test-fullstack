@@ -8,9 +8,9 @@
 
 ## O que foi desenvolvido?
 
-O <strong>UOL Customers</strong> é um desafio técnico da empresa <strong>UOL</strong>, e o objetivo foi criar uma aplicação full stack para o gerenciamento de clientes. O backend foi desenvolvido em node.js, typescript, express.js e prisma como ORM. O banco de dados na etapa de desenvolvimento foi o sqlite, devido sua facilidade de implementação, e na etapa de produção foi feita a migração para o postgreSQL. A estrutura de pastas foi seguida pelo modelo MSC (Model, Service e Controller), e a validação dos dados foi realizada com a bibilioteca zod, por possuir uma excelente integração com o typescript. Desenvolvi também um middleware que captura todas as excessões que ocorrem no fluxo da aplicação, com o auxilio da biblioteca express async errors. As rotas oferecem a possibilidade de criação, atualização e listagem de todos os clientes, há também um rota de autenticação de login por parte do usuário.
+O <strong>UOL Customers</strong> é um desafio técnico da empresa <strong>UOL</strong>, e o objetivo foi criar uma aplicação full stack para o gerenciamento de clientes. O backend foi desenvolvido em node.js, typescript, express.js e prisma como ORM. O banco de dados na etapa de desenvolvimento foi o sqlite, devido sua facilidade de implementação, e na etapa de produção foi feita a migração para o postgreSQL. A estrutura de pastas foi seguida pelo modelo MSC (Model, Service e Controller), e a validação dos dados foi realizada com a bibilioteca zod, por possuir uma excelente integração com o typescript. Desenvolvi também um middleware que captura todas as exceções que ocorrem no fluxo da aplicação, com o auxilio da biblioteca express async errors. As rotas oferecem a possibilidade de criação, atualização e listagem de todos os clientes, há também um rota de autenticação de login por parte do usuário.
 
-O frontend foi desenvolvido com o next.js versão 14 usando o router app. Para a estilização fiz uso da biblioteca styled components. A aplicação conta com uma página de login, onde é possivel entrar com um email e senha cadastrado no banco de dados, entrar com sua conta do github ou entrar como visitante (no modo visitante é possível desfrutar de todas as funcionalidades dos demais modos de login). Existe também uma página home onde é possivel observar todos os clientes cadastrados no banco de dados e também uma página de criação de atualização dos clientes.
+O frontend foi desenvolvido com o next.js versão 14 usando o router app. Para a estilização fiz uso da biblioteca styled components. A aplicação conta com uma página de login, onde é possivel entrar com um email e senha cadastrado no banco de dados, entrar com sua conta do github ou entrar como visitante (no modo visitante é possível desfrutar de todas as funcionalidades dos demais modos de login). Existe também uma página home onde é possivel observar todos os clientes cadastrados no banco de dados e também uma página de criação de atualização dos clientes, que só é possível após passar por uma validação de todos os campos do formulário.
 
 Os testes unitários foram escritos com jest no backend, e com jest e react testing library no frontend. Todos os testes estão na pasta "\__tests__\"
 
@@ -111,16 +111,22 @@ npm run test
 
 ## Variáveis de ambiente
 
-#### ➜ O backend necessita das variáveis para conexão com o banco de dados postgreSQL e uma porta para rodar a aplicação.
+#### ➜ O backend necessita das variáveis para conexão com o banco de dados postgreSQL e uma porta para rodar a aplicação (.env).
 ```javascript
 PORT=3001
 DATABASE_URL="postgres://default:a2OgzyG1jWSL@ep-sparkling-forest-a42ymh7g.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
 ```
 
-#### ➜ O frontend necessita das variáveis para autenticação com o github e o endereço da API.
+#### ➜ O frontend necessita das variáveis para autenticação com o github e o endereço da API (.env.local).
 ```javascript
 NEXT_PUBLIC_API_BASE_URL="https://uol-customers-api.up.railway.app"
 GITHUB_ID=1a9f20399365b9e3afb8
 GITHUB_SECRET=f0a79d5eba87040c556428bf530fe616ac6d5770
 NEXTAUTH_SECRET=1YKefTL6PJzen6abzJGk39U8KpJocbzZ2fPE3zpnEms=
 ```
+
+##
+
+<div align="center">
+  🐺
+</div>
