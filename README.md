@@ -10,7 +10,7 @@
 
 O <strong>UOL Customers</strong> é um desafio técnico da empresa <strong>UOL</strong>, e o objetivo foi criar uma aplicação full stack para o gerenciamento de clientes. O backend foi desenvolvido em node.js, typescript, express.js e prisma como ORM. O banco de dados na etapa de desenvolvimento foi o sqlite, devido sua facilidade de implementação, e na etapa de produção foi feita a migração para o postgreSQL. A estrutura de pastas foi seguida pelo modelo MSC (Model, Service e Controller), e a validação dos dados foi realizada com a bibilioteca zod, por possuir uma excelente integração com o typescript. Desenvolvi também um middleware que captura todas as exceções que ocorrem no fluxo da aplicação, com o auxilio da biblioteca express async errors. As rotas oferecem a possibilidade de criação, atualização e listagem de todos os clientes, há também um rota de autenticação de login por parte do usuário.
 
-O frontend foi desenvolvido com o next.js versão 14 usando o router app. Para a estilização fiz uso da biblioteca styled components. A aplicação conta com uma página de login, onde é possivel entrar com um email e senha cadastrado no banco de dados, entrar com sua conta do github ou entrar como visitante (no modo visitante é possível desfrutar de todas as funcionalidades dos demais modos de login). Existe também uma página home onde é possivel observar todos os clientes cadastrados no banco de dados e também uma página de criação de atualização dos clientes, que só é possível após passar por uma validação de todos os campos do formulário.
+O frontend foi desenvolvido com o next.js versão 14 usando o router app. Para a estilização fiz uso da biblioteca styled components. A aplicação conta com uma página de login, onde é possivel entrar com um email e senha cadastrado no banco de dados, entrar com sua conta do github ou entrar como visitante (no modo visitante é possível desfrutar de todas as funcionalidades dos demais modos de login). Existe também uma página home onde é possivel observar todos os clientes cadastrados no banco de dados e também uma página de criação de atualização dos clientes. O formulário foi desenvolvido com a biblioteca react hook form e a validação de todos os campo com a ferramenta zod.
 
 Os testes unitários foram escritos com jest no backend, e com jest e react testing library no frontend. Todos os testes estão na pasta "\__tests__\"
 
@@ -24,6 +24,7 @@ Os testes unitários foram escritos com jest no backend, e com jest e react test
 - PostgreSQL
 - Next.js
 - Styled Components
+- React Hook Form
 - Zod
 - Jest
 - React Testing Library
@@ -107,6 +108,12 @@ npm run test
 #### ➜ Dentro da pasta /frontend
 ```
 npm run test
+```
+
+## Login
+```javascript
+email: "admin@admin.com"
+senha: "admin"
 ```
 
 ## Variáveis de ambiente
