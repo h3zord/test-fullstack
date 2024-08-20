@@ -1,11 +1,5 @@
 <h1 align="center">Boas-vindas ao repositório do UOL Customers! 👨🏼‍💼</h1>
 
-<h2 align="center">
-  <a href="https://uol-customers.up.railway.app/" target="_blank">
-    Link da aplicação!
-  </a>
-</h2>
-
 ## O que foi desenvolvido?
 
 O <strong>UOL Customers</strong> é um desafio técnico da empresa <strong>UOL</strong>, e o objetivo foi criar uma aplicação full stack para o gerenciamento de clientes. O backend foi desenvolvido em node.js, typescript, express.js e prisma como ORM. O banco de dados na etapa de desenvolvimento foi o sqlite, devido sua facilidade de implementação, e na etapa de produção foi feita a migração para o postgreSQL. A estrutura de pastas foi seguida pelo modelo MSC (Model, Service e Controller), e a validação dos dados foi realizada com a bibilioteca zod, por possuir uma excelente integração com o typescript. Desenvolvi também um middleware que captura todas as exceções que ocorrem no fluxo da aplicação, com o auxilio da biblioteca express async errors. As rotas oferecem a possibilidade de criação, atualização e listagem de todos os clientes, há também um rota de autenticação de login por parte do usuário.
